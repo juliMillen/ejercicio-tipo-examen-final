@@ -3,11 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.IO;
 
 namespace ejercicio_tipo_final
 {
     [Serializable]
-    class Pedido
+    class Pedido:IEscribir
     {
         private double valor;
         private int nro;
@@ -46,6 +47,13 @@ namespace ejercicio_tipo_final
         public string VerResumen()
         {
             return Nro + " " + Detalle + " " + FechaHora + " " + Valor;
+        }
+
+        public void Escribir(string path)
+        {
+            string linea = $"{Nro},{FechaHora},{Detalle},{Valor}";
+
+            File.WriteAllText(path, linea);
         }
     }
 }

@@ -3,11 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.IO;
 
 namespace ejercicio_tipo_final
 {
     [Serializable]
-    class ClienteCuenta:IComparable
+    class ClienteCuenta:IComparable,IEscribir
     {
         List<Pedido> listaPedidos = new List<Pedido>();
         private string nombre;
@@ -15,7 +16,7 @@ namespace ejercicio_tipo_final
         private double saldoCuenta;
         private double tope;
 
-        private string Nombre
+        public string Nombre
         {
             get { return nombre; }
             set { nombre = value; }
@@ -68,12 +69,23 @@ namespace ejercicio_tipo_final
                 puedePagar = true;
                 saldoCuenta -= monto;
             }
+            else
+            {
+                throw new Exception("Se ha pasado del limite");
+            }
             return puedePagar;
         }
 
         public int CompareTo(Object obj)
         {
             return this.Cuit.CompareTo(((ClienteCuenta)obj).Cuit);
+        }
+
+        public void Escribir(string path)
+        {
+            string linea = $"{nombre},{cuit},{saldoCuenta}";
+
+            File.WriteAllText(path, linea);
         }
     }
 }

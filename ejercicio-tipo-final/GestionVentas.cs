@@ -14,7 +14,7 @@ namespace ejercicio_tipo_final
         public List<Producto> lista = new List<Producto>();
         public ArrayList listaClientes = new ArrayList();
         private double montoFacturado;
-        private readonly DateTime inicioOperaciones = new DateTime();
+        private DateTime inicioOperaciones = new DateTime();
         private int nroPedido;
 
         public int NroPedido
